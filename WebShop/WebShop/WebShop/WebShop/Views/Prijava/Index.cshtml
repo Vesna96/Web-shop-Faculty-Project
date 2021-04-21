@@ -1,0 +1,20 @@
+﻿@model WebShop.Models.Korisnik
+@{
+    ViewBag.Title = "Prijava";
+}
+
+<h2>Prijava</h2>
+
+@using (Html.BeginForm("PrijaviSe", "Prijava", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.LabelFor(model => model.Email)
+    <br />
+    @Html.TextBoxFor(model => model.Email)
+    <br />
+    @Html.LabelFor(model => model.Lozinka)
+    <br />
+    @Html.TextBoxFor(model => model.Lozinka, htmlAttributes: new { @type = "password" })
+    <br />
+    <input type="submit" value="Prijavi se" />
+}
+

@@ -1,0 +1,11 @@
+﻿@model WebShop.Models.Korisnik
+@{
+    ViewBag.Title = "Index";
+}
+
+@if(Model != null)
+{
+    <h2>@Model.Ime @Model.Prezime</h2>
+}
+@Html.ActionLink("Odjavi se","OdjaviSe","KorisnikM")
+

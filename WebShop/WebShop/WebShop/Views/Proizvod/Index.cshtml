@@ -1,0 +1,230 @@
+﻿@model WebShop.Models.KorisnikProizvod
+@using WebShop.Models
+@{
+    ViewBag.Title = "Prikazi";
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+@if (Model != null)
+{
+
+
+    <h2>@Model.Ime @Model.Prezime</h2><br />
+
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <img src="@Url.Content(Model.Slika)" width='250' height='250' />
+                </div>
+                <br />
+                <label>Sifra proizvoda: @Model.Sifra</label> <br />
+                <label>Vrsta proizvoda: @Model.Podtip</label><br />
+                @if (Model.Pol == "M")
+                {
+                    <label>Kolekcija: Muska</label><br />
+
+
+                }
+                else
+                {
+                    <label>Kolekcija: Zenska</label><br />
+                }
+                <label>Materijal: @Model.Materijal</label><br />
+                <label>Marka proizvoda: @Model.Marka</label><br />
+                <label>Proizvod pripada stilovima: </label>
+                @for (int i = 0; i < Model.Stilovi.Count; i++)
+                {
+
+                    <label>@Model.Stilovi[i].Naziv   </label>
+                }
+                <br />
+                <label>Cena proizvoda: @Model.Cena din.</label><br />
+                <label>Dostupne boje proizvoda:</label>
+                @for (int i = 0; i < Model.Boje.Count; i++)
+                {
+                    if (Model.Boje[i] != null)
+                    {
+                        <label>@Model.Boje[i].Naziv   </label>
+                    }
+                }
+                <br />
+                <label>Dostupne velicine proizvoda:</label>
+                @for (int i = 0; i < Model.Velicine.Count; i++)
+                {
+                    if (Model.Velicine[i] != null)
+                    {
+                        <label>@Model.Velicine[i].Oznaka   </label>
+                    }
+                }
+
+
+
+                @if (Model.Like)
+                {
+                    using (Html.BeginForm("Dislike", "Proizvod", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(model => model.Ime);
+                        @Html.HiddenFor(model => model.Prezime);
+                        @Html.HiddenFor(model => model.Pol);
+                        @Html.HiddenFor(model => model.Sifra);
+                        @Html.HiddenFor(model => model.Stilovi);
+                        @Html.HiddenFor(model => model.Podtip);
+                        @Html.HiddenFor(model => model.Materijal);
+                        @Html.HiddenFor(model => model.Like);
+                        @Html.HiddenFor(model => model.Velicine);
+                        @Html.HiddenFor(model => model.Cena);
+                        @Html.HiddenFor(model => model.Email);
+                        @Html.HiddenFor(model => model.Boje);
+                        @Html.HiddenFor(model => model.Marka);
+                        @Html.HiddenFor(model => model.Slika);
+
+                        for (int i = 0; i < Model.SlicniProizvodi.Count; i++)
+                        {
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Marka);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Pol);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Sifra);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Podtip);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Materijal);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Cena);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].PutanjeSlika[0]);
+                        }
+                        <input type="submit" value="Ne svidja mi se" />
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("Like", "Proizvod", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(model => model.Ime);
+                        @Html.HiddenFor(model => model.Prezime);
+                        @Html.HiddenFor(model => model.Pol);
+                        @Html.HiddenFor(model => model.Sifra);
+                        @Html.HiddenFor(model => model.Stilovi);
+                        @Html.HiddenFor(model => model.Podtip);
+                        @Html.HiddenFor(model => model.Materijal);
+                        @Html.HiddenFor(model => model.Like);
+                        @Html.HiddenFor(model => model.Velicine);
+                        @Html.HiddenFor(model => model.Cena);
+                        @Html.HiddenFor(model => model.Email);
+                        @Html.HiddenFor(model => model.Boje);
+                        @Html.HiddenFor(model => model.Marka);
+                        @Html.HiddenFor(model => model.Slika);
+
+                        for (int i = 0; i < Model.SlicniProizvodi.Count; i++)
+                        {
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Marka);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Pol);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Sifra);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Podtip);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Materijal);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].Cena);
+                            @Html.HiddenFor(model => model.SlicniProizvodi[i].PutanjeSlika[0]);
+                        }
+
+                        <input type="submit" value="Svidja mi se" />
+                    }
+                }
+                @using (Html.BeginForm("Naruci", "Proizvod", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.Ime);
+                    @Html.HiddenFor(model => model.Prezime);
+                    @Html.HiddenFor(model => model.Pol);
+                    @Html.HiddenFor(model => model.Sifra);
+                    @Html.HiddenFor(model => model.Stilovi);
+                    @Html.HiddenFor(model => model.Podtip);
+                    @Html.HiddenFor(model => model.Materijal);
+                    @Html.HiddenFor(model => model.Like);
+                    @Html.HiddenFor(model => model.Velicine);
+                    @Html.HiddenFor(model => model.Cena);
+                    @Html.HiddenFor(model => model.Email);
+                    @Html.HiddenFor(model => model.Boje);
+                    @Html.HiddenFor(model => model.Marka);
+                    @Html.HiddenFor(model => model.Slika);
+                    @Html.Label("Unesite velicinu    ");
+                    @Html.TextBox("Velicina");
+                    <br />
+                    @Html.Label("   Unesite boju  ");
+                    @Html.TextBox("Boja");
+                    <br/>
+                    for (int i = 0; i < Model.SlicniProizvodi.Count; i++)
+                    {
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].Marka);
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].Pol);
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].Sifra);
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].Podtip);
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].Materijal);
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].Cena);
+                        @Html.HiddenFor(model => model.SlicniProizvodi[i].PutanjeSlika[0]);
+                    }
+
+                    <input type="submit" value="Naruci" />
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h3 class="h3">Slicni proizvodi </h3>
+        <div class="row">
+
+            @if (Model.SlicniProizvodi != null)
+            {
+                foreach (Proizvod p in Model.SlicniProizvodi)
+                {
+                    if (p != null)
+                    {
+                        using (Html.BeginForm("Prikazi", "Korisnik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="ime" value=@Model.Ime />
+                            <input type="hidden" name="prezime" value=@Model.Prezime />
+                            <input type="hidden" name="sifra" value=@p.Sifra />
+                            <input type="hidden" name="podtip" value=@p.Podtip />
+                            <input type="hidden" name="marka" value=@p.Marka />
+                            <input type="hidden" name="materijal" value=@p.Materijal />
+                            <input type="hidden" name="cena" value=@p.Cena />
+                            <input type="hidden" name="pol" value=@p.Pol />
+                            <input type="hidden" name="Email" value=@Model.Email />
+                            <input type="hidden" name="putanja" value=@p.PutanjeSlika[0] />
+
+                            <div class="col-md-3 col-sm-6">
+                                <div class="product-grid">
+                                    <div class="product-image">
+                                        <img src="@Url.Content(p.PutanjeSlika.First())" width='160' height='160' />
+                                        </div>
+                                        <br />
+                                        <label>Sifra proizvoda: @p.Sifra</label> <br />
+                                        <label>Vrsta proizvoda: @p.Podtip</label><br />
+                                        @if (@p.Pol == "M")
+                                        {
+                                        <label>Kolekcija: Muska</label><br />
+
+
+                                        }
+                                        else
+                                        {
+                                        <label>Kolekcija: Zenska</label><br />
+                                        }
+                                        <label>Materijal: @p.Materijal</label><br />
+                                        <label>Marka proizvoda: @p.Marka</label><br />
+                                        <input type="submit" value="Prikazi" />
+                                        </div>
+</div>
+                        }
+                    }
+                }
+            }
+                                        
+            </div>
+</div>
+}

@@ -1,0 +1,92 @@
+﻿@model WebShop.Models.Korisnik
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model != null)
+{
+    <h2>@Model.Ime @Model.Prezime</h2>
+}
+
+
+
+
+@using (Html.BeginForm("Filtriraj", "Korisnik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.Email)
+    <label>Pol: </label> <br />
+    @Html.RadioButton("pol", "M")
+    <label>Muski</label>
+    @Html.RadioButton("pol", "Z")
+    <label>Zenski</label>
+    <br />
+
+    <select name="odeca">
+        <option value="">Izaberi odecu</option>
+        <option value="Jakne">Jakne</option>
+        <option value="Kaputi">Kaputi</option>
+        <option value="Duksevi">Duksevi</option>
+        <option value="Dzemperi">Dzemperi</option>
+        <option value="Rolke">Rolke</option>
+        <option value="Pantalone">Pantalone</option>
+        <option value="Kosulje">Kosulje</option>
+        <option value="Trenerke">Trenerke</option>
+        <option value="Farmerke">Farmerke</option>
+        <option value="Haljine">Haljine</option>
+        <option value="Suknje">Suknje</option>
+        <option value="Majice">Majice</option>
+        <option value="Sorcevi">Sorcevi</option>
+        <option value="Bermude">Bermude</option>
+    </select>
+
+    <select name="obuca">
+        <option value="">Izaberi obucu</option>
+        <option value="Patike">Patike</option>
+        <option value="Cipele">Cipele</option>
+        <option value="Cizme">Cizme</option>
+        <option value="Stikle">Stikle</option>
+        <option value="Papuce">Papuce</option>
+    </select>
+
+    <select name="aksesoari">
+        <option value="">Izaberi aksesoar</option>
+        <option value="Tasne">Tasne</option>
+        <option value="Torbe">Torbe</option>
+        <option value="Kaisi">Kaisi</option>
+        <option value="Kravate">Kravate</option>
+        <option value="LeptirMasne">Leptir masne</option>
+        <option value="Novcanici">Novcanici</option>
+        <option value="Neseseri">Neseseri</option>
+    </select>
+    <br />
+
+    <br />
+    <label>Cena od:</label> @Html.TextBox("cenaOd", null, htmlAttributes: new { type = "number" })
+    <label>Cena do:</label> @Html.TextBox("cenaDo", null, htmlAttributes: new { type = "number" })
+    <br />
+    <label>Stilovi: </label>
+    <br />
+    @Html.CheckBox("Elegantni", false) <label>Elegantni</label>
+    @Html.CheckBox("Street", false) <label>Street</label>
+    @Html.CheckBox("Sportski", false) <label>Sportski</label>
+    @Html.CheckBox("Poslovni", false) <label>Poslovni</label>
+    @Html.CheckBox("Casual", false) <label>Casual</label>
+    @Html.CheckBox("Rock", false) <label>Rock</label>
+    <br />
+    <label>Marka: </label>
+    <br />
+    @Html.CheckBox("Orsay", false) <label>Orsay</label>
+    @Html.CheckBox("TomTaylor", false) <label>Tom Taylor</label>
+    @Html.CheckBox("Bata", false) <label>Bata</label>
+    @Html.CheckBox("Nike", false) <label>Nike</label>
+    @Html.CheckBox("Adidas", false) <label>Addidas</label>
+    @Html.CheckBox("Kappa", false) <label> Kappa </label>
+    <br />
+
+
+
+    <input type="submit" value="Pretrazi" />
+}
+
+@Html.ActionLink("Odjavi se", "OdjaviSe", "Korisnik")
+

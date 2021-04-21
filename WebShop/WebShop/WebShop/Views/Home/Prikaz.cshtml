@@ -1,0 +1,88 @@
+﻿@model WebShop.Models.ProizvodISlicniProizvodi
+@using WebShop.Models
+@{
+    ViewBag.Title = "Prikaz";
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+@if (Model.Proizvod != null)
+{
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <img src="@Url.Content(Model.Proizvod.PutanjeSlika[0])" width='250' height='250' /><br />
+                </div>
+                <label>Sifra proizvoda: @Model.Proizvod.Sifra</label> <br />
+                <label>Vrsta proizvoda: @Model.Proizvod.Podtip</label><br />
+                @if (Model.Proizvod.Pol == "M")
+                {
+                    <label>Kolekcija: Muska</label><br />
+
+
+                }
+                else
+                {
+                    <label>Kolekcija: Zenska</label><br />
+                }
+                <label>Materijal: @Model.Proizvod.Materijal</label><br />
+                <label>Marka proizvoda: @Model.Proizvod.Marka</label><br />
+                <label>Cena proizvoda: @Model.Proizvod.Cena</label><br />
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 class="h3">Slicni proizvodi </h3>
+        <div class="row">
+
+            @foreach (Proizvod p in Model.SlicniProizvodi)
+            {
+                using (Html.BeginForm("Prikazi", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <input type="hidden" name="sifra" value=@p.Sifra />
+                    <input type="hidden" name="podtip" value=@p.Podtip />
+                    <input type="hidden" name="marka" value=@p.Marka />
+                    <input type="hidden" name="materijal" value=@p.Materijal />
+                    <input type="hidden" name="cena" value=@p.Cena />
+                    <input type="hidden" name="tip" value=@p.Tip />
+                    <input type="hidden" name="pol" value=@p.Pol />
+
+                    <input type="hidden" name="putanja" value=@p.PutanjeSlika[0] />
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <img src="@Url.Content(p.PutanjeSlika[0])" width='160' height='160' /><br />
+                            </div>
+                            <label>Vrsta proizvoda: @p.Podtip</label><br />
+                            @if (p.Pol == "M")
+                            {
+                                <label>Kolekcija: Muska</label><br />
+
+
+                            }
+                            else
+                            {
+                                <label>Kolekcija: Zenska</label><br />
+                            }
+                            <input type="submit" value="Prikazi" />
+                            
+                        </div>
+                    </div>
+                }
+
+            }
+            </div>
+            </div>
+}

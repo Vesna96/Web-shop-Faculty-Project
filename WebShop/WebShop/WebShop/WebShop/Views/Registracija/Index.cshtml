@@ -1,0 +1,71 @@
+﻿@model WebShop.Models.RegistracijaModel
+@{
+    ViewBag.Title = "Registracija";
+}
+
+<h2>Registracija</h2>
+
+@using (Html.BeginForm("DodajKorisnika", "Registracija", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.PopuniSve != null)
+    {
+        <label>@ViewBag.PopuniSve</label>
+    }
+    <br />
+    @Html.LabelFor(model => model.Korisnik.Ime)
+
+    <br />
+    @Html.TextBoxFor(model => model.Korisnik.Ime)
+    <label>*</label>
+    <br />
+    @Html.LabelFor(model => model.Korisnik.Prezime)
+    <br />
+    @Html.TextBoxFor(model => model.Korisnik.Prezime)
+    <lable>*</lable>
+    <br />
+
+    @Html.LabelFor(model => model.Korisnik.Email)
+    <br />
+    if (ViewBag.EmailMsg != null)
+    {
+        <label>@ViewBag.EmailMsg</label>
+    }
+    <br />
+    @Html.TextBoxFor(model => model.Korisnik.Email)
+    <lable>*</lable>
+    <br />
+
+    @Html.LabelFor(model => model.Korisnik.Lozinka)
+    <br />
+    @Html.TextBoxFor(model => model.Korisnik.Lozinka, htmlAttributes: new { @type = "password" })
+    <lable>*</lable>
+    <br />
+
+    <label>Potvrdi lozinku</label>
+    <br />
+    <input type="password" name="potvrdaLozinke" />
+    <lable>*</lable>
+
+    if (ViewBag.Message != null)
+    {
+        <label>@ViewBag.Message</label>
+    }
+    <br />
+
+    <label>Pol: </label>
+    @Html.RadioButtonFor(model => model.Korisnik.Pol, "Muski", htmlAttributes: new { @name = "pol" })
+    <label>Muski</label>
+    @Html.RadioButtonFor(model => model.Korisnik.Pol, "Zenski", htmlAttributes: new { @name = "pol" })
+    <label>Zenski   *</label>
+    <br />
+    <label>Omiljena boja</label>
+    <br />
+    @Html.DropDownListFor(model => model.ListaBoja.Boje, Model.ListaBoja.Boje)
+    <br />
+    <label>Stil oblacenja</label>
+    <br />
+    @Html.DropDownListFor(model => model.ListaStilova.Stilovi, Model.ListaStilova.Stilovi)
+    <br /> <br />
+    <input type="submit" value="Registruj se" />
+}
+

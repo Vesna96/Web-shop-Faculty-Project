@@ -1,0 +1,37 @@
+﻿@model WebShop.Models.KorisnikProizvod
+@{
+    ViewBag.Title = "Prikazi";
+}
+
+@if (Model != null)
+{
+
+    <h2>@Model.Ime @Model.Prezime</h2><br />
+    <label>Sifra proizvoda: @Model.Sifra</label> <br />
+    <label>Vrsta proizvoda: @Model.Podtip</label><br />
+    <label>Kolekcija: @Model.Pol</label><br />
+    <label>Materijal: @Model.Materijal</label><br />
+    <label>Marka proizvoda: @Model.Marka</label><br />
+    <label>Proizvod pripada stilovima: </label>
+    for (int i = 0; i < Model.Stilovi.Count; i++)
+    {
+
+        <label>@Model.Stilovi[i].Naziv , </label>
+    }
+    <br />
+    <label>Cena proizvoda: @Model.Cena din.</label><br />
+    <label>Dostupne boje proizvoda:</label>
+    for (int i = 0; i < Model.Boje.Count; i++)
+    {
+
+        <label>@Model.Boje[i].Naziv , </label>
+    }
+    <br />
+    <label>Dostupne velicine proizvoda:</label>
+    for (int i = 0; i < Model.Velicine.Count; i++)
+    {
+
+        <label>@Model.Velicine[i].Oznaka ,</label>
+    }
+
+}

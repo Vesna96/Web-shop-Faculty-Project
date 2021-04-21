@@ -1,0 +1,143 @@
+﻿@model WebShop.Models.RegistracijaModel
+@{
+    ViewBag.Title = "Registracija";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registracija</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            @Html.ActionLink("Web shop", "Reload", "Home", new { @class = "navbar-brand" }, null)
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Registracija", "Index", "Registracija", new { @class = "nav-link" }, null)
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">   </a>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Prijava", "Index", "Prijava", new { @class = "nav-link" }, null)
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br/>
+    <br/>
+    <div class="container">
+        <h2>Registracija</h2>
+
+        @using (Html.BeginForm("DodajKorisnika", "Registracija", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            if (ViewBag.PopuniSve != null)
+            {
+                <label>@ViewBag.PopuniSve</label>
+            }
+
+            <label>Ime *</label>
+
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Korisnik.Ime, new { placeholder = "Unesite ime" })
+            </div>
+
+            <label>Prezime *</label>
+
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Korisnik.Prezime, new { placeholder = "Unesite prezime" })
+            </div>
+
+            <label>Email *</label>
+            if (ViewBag.EmailMsg != null)
+            {
+                <label>@ViewBag.EmailMsg</label>
+            }
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Korisnik.Email, new { placeholder = "Unesite email" })
+            </div>
+
+            <label>Lozinka *</label>
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Korisnik.Lozinka, htmlAttributes: new { @type = "password", placeholder = "Unesite lozinku" })
+            </div>
+
+            <label>Potvrdi lozinku *</label>
+            <div class="form-group">
+                <input type="password" name="potvrdaLozinke" placeholder="Potvrdite lozinku" />
+            </div>
+
+            if (ViewBag.Message != null)
+            {
+                <label>@ViewBag.Message</label>
+            }
+            <label>Pol *</label>
+            <div class="form-group">
+
+                @Html.RadioButtonFor(model => model.Korisnik.Pol, "Muski", htmlAttributes: new { @name = "pol" })
+                <label>Muski</label>
+                @Html.RadioButtonFor(model => model.Korisnik.Pol, "Zenski", htmlAttributes: new { @name = "pol" })
+                <label>Zenski</label>
+            </div>
+            /*<label>Omiljena boja</label>
+            <br />
+            @Html.DropDownListFor(model => model.ListaBoja.Boje, Model.ListaBoja.Boje)
+            <br />
+            <label>Stil oblacenja</label>
+            <br />
+            @Html.DropDownListFor(model => model.ListaStilova.Stilovi, Model.ListaStilova.Stilovi)*/
+            <label>Stil oblacenja   Omiljena boja</label>
+            <div class="form-group">
+                <select name="stilovi">
+                    <option value="">Izaberi stil</option>
+                    <option value="Sportski">Sportski</option>
+                    <option value="Poslovni">Poslovni</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Street">Street</option>
+                    <option value="Elegantni">Elegantni</option>
+                </select>
+
+                <select name="boje">
+                    <option value="">Izaberi boju</option>
+                    <option value="Plava">Plava</option>
+                    <option value="Crvena">Crvena</option>
+                    <option value="Bela">Bela</option>
+                    <option value="Crna">Crna</option>
+                    <option value="Zuta">Zuta</option>
+                    <option value="Zelena">Zelena</option>
+                    <option value="Ljubicasta">Ljubicasta</option>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Registruj se" />
+        }
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

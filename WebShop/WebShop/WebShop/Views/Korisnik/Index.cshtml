@@ -1,0 +1,324 @@
+﻿
+@model WebShop.Models.KorisnikProizvodi
+@using WebShop.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">@Model.Korisnik.Ime @Model.Korisnik.Prezime</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">   </a>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Odjavi se", "OdjaviSe", "Korisnik", new { @class = "nav-link" }, null)
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">   </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+@*@using (Html.BeginForm("Filtriraj", "Korisnik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.Korisnik.Email)
+        @Html.HiddenFor(model => model.Korisnik.Ime)
+        @Html.HiddenFor(model => model.Korisnik.Prezime)
+        @Html.HiddenFor(model => model.Korisnik.DatumRodjenja)
+        //@Html.HiddenFor(model => model.Korisnik.StilOblacenja)
+        @Html.HiddenFor(model => model.Korisnik.Id)
+        @Html.HiddenFor(model => model.Korisnik.Pol)
+        //@Html.HiddenFor(model => model.Korisnik.OmiljenaBoja)
+        @Html.HiddenFor(model => model.Korisnik.Lozinka)
+        @Html.HiddenFor(model => model.Korisnik.Adresa)
+        <label>Pol: </label> <br />
+        @Html.RadioButton("pol", "M")
+        <label>Muski</label>
+        @Html.RadioButton("pol", "Z")
+        <label>Zenski</label>
+        <br />
+
+        <select name="odeca">
+            <option value="">Izaberi odecu</option>
+            <option value="Jakna">Jakne</option>
+            <option value="Kaput">Kaputi</option>
+            <option value="Duks">Duksevi</option>
+            <option value="Dzemper">Dzemperi</option>
+            <option value="Rolka">Rolke</option>
+            <option value="Pantalone">Pantalone</option>
+            <option value="Kosulja">Kosulje</option>
+            <option value="Trenerka">Trenerke</option>
+            <option value="Farmerke">Farmerke</option>
+            <option value="Haljina">Haljine</option>
+            <option value="Suknja">Suknje</option>
+            <option value="Majica">Majice</option>
+            <option value="Sorc">Sorcevi</option>
+            <option value="Bermude">Bermude</option>
+        </select>
+
+        <select name="obuca">
+            <option value="">Izaberi obucu</option>
+            <option value="Patike">Patike</option>
+            <option value="Cipele">Cipele</option>
+            <option value="Cizme">Cizme</option>
+            <option value="Stikle">Stikle</option>
+            <option value="Papuce">Papuce</option>
+        </select>
+
+        <select name="aksesoari">
+            <option value="">Izaberi aksesoar</option>
+            <option value="Tasna">Tasne</option>
+            <option value="Torba">Torbe</option>
+            <option value="Kais">Kaisi</option>
+            <option value="Kravata">Kravate</option>
+            <option value="LeptirMasna">Leptir masne</option>
+            <option value="Novcanik">Novcanici</option>
+            <option value="Neseser">Neseseri</option>
+        </select>
+        <br />
+
+        <br />
+        <label>Cena od:</label> @Html.TextBox("cenaOd", null, htmlAttributes: new { type = "number" })
+        <label>Cena do:</label> @Html.TextBox("cenaDo", null, htmlAttributes: new { type = "number" })
+        <br />
+        <label>Stilovi: </label>
+        <br />
+        @Html.CheckBox("Elegantni", false) <label>Elegantni</label>
+        @Html.CheckBox("Street", false) <label>Street</label>
+        @Html.CheckBox("Sportski", false) <label>Sportski</label>
+        @Html.CheckBox("Poslovni", false) <label>Poslovni</label>
+        @Html.CheckBox("Casual", false) <label>Casual</label>
+        @Html.CheckBox("Rock", false) <label>Rock</label>
+        <br />
+        <label>Marka: </label>
+        <br />
+        @Html.CheckBox("Orsay", false) <label>Orsay</label>
+        @Html.CheckBox("TomTaylor", false) <label>Tom Taylor</label>
+        @Html.CheckBox("Bata", false) <label>Bata</label>
+        @Html.CheckBox("Nike", false) <label>Nike</label>
+        @Html.CheckBox("Adidas", false) <label>Addidas</label>
+        @Html.CheckBox("Kappa", false) <label> Kappa </label>
+        <br />
+
+
+
+        <input type="submit" value="Pretrazi" />
+    }*@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-md-offset-3 col-lg-offset-0">
+            <div class="well">
+                <h3 align="center">Pretrazivanje</h3>
+
+                @using (Html.BeginForm("Filtriraj", "Korisnik", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(model => model.Korisnik.Email)
+                    @Html.HiddenFor(model => model.Korisnik.Ime)
+                    @Html.HiddenFor(model => model.Korisnik.Prezime)
+                    @Html.HiddenFor(model => model.Korisnik.DatumRodjenja)
+                    //@Html.HiddenFor(model => model.Korisnik.StilOblacenja)
+                    @Html.HiddenFor(model => model.Korisnik.Id)
+                    @Html.HiddenFor(model => model.Korisnik.Pol)
+                    //@Html.HiddenFor(model => model.Korisnik.OmiljenaBoja)
+                    @Html.HiddenFor(model => model.Korisnik.Lozinka)
+                    @Html.HiddenFor(model => model.Korisnik.Adresa)
+
+                    <div class="form-group">
+                        <label for="location1" class="control-label">Pol: </label> <br />
+                        <input type="radio" name="pol" value="M" class="control-label" />
+                        <label for="location1" class="control-label">Muski </label> <br />
+                        <input type="radio" name="pol" value="Z" class="control-label" />
+                        <label for="location1" class="control-label">Zenski </label> <br />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type1" class="control-label">Odeca</label>
+
+                        <select name="odeca" class="form-control" id="type1">
+                            <option value="">Izaberi odecu</option>
+                            <option value="Jakne">Jakne</option>
+                            <option value="Kaputi">Kaputi</option>
+                            <option value="Duksevi">Duksevi</option>
+                            <option value="Dzemperi">Dzemperi</option>
+                            <option value="Rolke">Rolke</option>
+                            <option value="Pantalone">Pantalone</option>
+                            <option value="Kosulja">Kosulje</option>
+                            <option value="Trenerke">Trenerke</option>
+                            <option value="Farmerke">Farmerke</option>
+                            <option value="Haljina">Haljine</option>
+                            <option value="Suknje">Suknje</option>
+                            <option value="Majica">Majice</option>
+                            <option value="Sorcevi">Sorcevi</option>
+                            <option value="Bermude">Bermude</option>
+                        </select>
+
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="type1" class="control-label">Obuca</label>
+
+
+                        <select name="obuca" class="form-control" id="type1">
+                            <option value="">Izaberi obucu</option>
+                            <option value="Patike">Patike</option>
+                            <option value="Cipele">Cipele</option>
+                            <option value="Cizme">Cizme</option>
+                            <option value="Stikle">Stikle</option>
+                            <option value="Papuce">Papuce</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type1" class="control-label">Aksesoari</label>
+                        <select name="aksesoari" class="form-control" id="type1">
+                            <option value="">Izaberi aksesoar</option>
+                            <option value="Tasna">Tasne</option>
+                            <option value="Torba">Torbe</option>
+                            <option value="Kais">Kaisi</option>
+                            <option value="Kravata">Kravate</option>
+                            <option value="LeptirMasna">Leptir masne</option>
+                            <option value="Novcanik">Novcanici</option>
+                            <option value="Neseser">Neseseri</option>
+                        </select>
+                        <br />
+
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pricefrom" class="control-label">Minimalna cena</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" id="basic-addon1">Din</div>
+                            <input type="text" class="form-control" id="pricefrom" name="cenaOd" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="priceto" class="control-label">Maksimalna cena</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" id="basic-addon2">Din</div>
+                            <input type="text" class="form-control" id="priceto" name="cenaDo" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type1" class="control-label">Stilovi </label>
+
+                        <br />
+                        @Html.CheckBox("Elegantni", false, new { @class = "control-label" }) <label for="location1" class="control-label">Elegantni</label>
+                        @Html.CheckBox("Street", false, new { @class = "control-label" }) <label for="location1" class="control-label">Street</label>
+                        @Html.CheckBox("Sportski", false, new { @class = "control-label" }) <label for="location1" class="control-label">Sportski</label>
+                        @Html.CheckBox("Poslovni", false, new { @class = "control-label" }) <label for="location1" class="control-label">Poslovni</label>
+                        @Html.CheckBox("Casual", false, new { @class = "control-label" }) <label for="location1" class="control-label">Casual</label>
+                        @Html.CheckBox("Rock", false, new { @class = "control-label" }) <label for="location1" class="control-label">Rock</label>
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <label for="type1" class="control-label">Marke </label>
+
+                        <br />
+                        @Html.CheckBox("Orsay", false, new { @class = "control-label" }) <label for="location1" class="control-label">Orsay</label>
+                        @Html.CheckBox("TomTaylor", false, new { @class = "control-label" }) <label for="location1" class="control-label">Tom Taylor</label>
+                        @Html.CheckBox("Bata", false, new { @class = "control-label" }) <label for="location1" class="control-label">Bata</label>
+                        @Html.CheckBox("Nike", false, new { @class = "control-label" }) <label for="location1" class="control-label">Nike</label>
+                        @Html.CheckBox("Adidas", false, new { @class = "control-label" }) <label for="location1" class="control-label">Addidas</label>
+                        @Html.CheckBox("Kappa", false, new { @class = "control-label" }) <label for="location1" class="control-label"> Kappa </label>
+                        <br />
+                    </div>
+                    <input type="submit" value="Pretrazi" class="btn btn-danger glyphicon glyphicon-search" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="row">
+        @if (Model.Proizvodi != null)
+        {
+            foreach (Proizvod p in Model.Proizvodi)
+            {
+                if (p != null)
+                {
+                    using (Html.BeginForm("Prikazi", "Korisnik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="col-md-3 col-sm-6">
+                            <div class="product-grid">
+                                <div class="product-image">
+                                    <img src="@Url.Content(p.PutanjeSlika.First())" width='160' height='160' />
+
+                                    <br />
+                                    <input type="hidden" name="ime" value=@Model.Korisnik.Ime />
+                                    <input type="hidden" name="prezime" value=@Model.Korisnik.Prezime />
+                                    <input type="hidden" name="sifra" value=@p.Sifra />
+                                    <input type="hidden" name="podtip" value=@p.Podtip />
+                                    <input type="hidden" name="marka" value=@p.Marka />
+                                    <input type="hidden" name="materijal" value=@p.Materijal />
+                                    <input type="hidden" name="cena" value=@p.Cena />
+                                    <input type="hidden" name="pol" value=@p.Pol />
+                                    <input type="hidden" name="Email" value=@Model.Korisnik.Email />
+                                    <input type="hidden" name="putanja" value=@p.PutanjeSlika.First() />
+
+                                    <br />
+                                    <label >@p.Podtip</label>
+                                    <br />
+                                    <label>Marka: </label><label>@p.Marka</label>
+                                    <br />
+                                    <label>Cena: </label><label>@p.Cena din</label>
+                                    <br />
+                                    <input type="submit" value="Prikazi" />
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            }
+
+        }
+    </div>
+</div>
